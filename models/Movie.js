@@ -6,6 +6,7 @@ const movie = new Schema({
   release_date: String,
   poster_path: String,
   overview: String,
+  reviews: Object,
 });
 
 const Movie = models.Movie || model("Movie", movie);

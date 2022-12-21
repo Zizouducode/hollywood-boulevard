@@ -79,14 +79,11 @@ export async function getServerSideProps(context) {
   let dataToDisplay = {};
 
   try {
-    const { data } = await axios.get(
-      `https://lereacteur-bootcamp-api.herokuapp.com/api/allocine/movie/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.API_TOKEN}`,
-        },
-      }
-    );
+    const { data } = await axios.get(`http://localhost:3000/api/movies/${id}`, {
+      headers: {
+        Authorization: `Bearer ${process.env.API_TOKEN}`,
+      },
+    });
     dataToDisplay = data;
     console.log(data);
   } catch (error) {

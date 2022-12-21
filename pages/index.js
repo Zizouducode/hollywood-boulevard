@@ -23,7 +23,7 @@ export default function Home({ data }) {
             </h2>
 
             <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-              {data.results.map((movie) => (
+              {data.map((movie) => (
                 <div key={movie.id} className="group relative">
                   <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none lg:h-80">
                     <Image
@@ -37,7 +37,7 @@ export default function Home({ data }) {
                   <div className="mt-4 flex justify-between">
                     <div>
                       <h3 className="text-sm text-gray-700">
-                        <Link href={{ pathname: `/movie/${movie.id}` }}>
+                        <Link href={{ pathname: `/movie/${movie._id}` }}>
                           <span
                             aria-hidden="true"
                             className="absolute inset-0"
@@ -65,14 +65,11 @@ export async function getServerSideProps() {
   let dataToSend = [];
 
   try {
-    const { data } = await axios.get(
-      "https://lereacteur-bootcamp-api.herokuapp.com/api/allocine/movies/top_rated",
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.API_TOKEN}`,
-        },
-      }
-    );
+    const { data } = await axios.get("http://localhost:3000/api/movies", {
+      headers: {
+        Authorization: `Bearer ${process.env.API_TOKEN}`,
+      },
+    });
     dataToSend = data;
     // console.log(data);
   } catch (error) {
